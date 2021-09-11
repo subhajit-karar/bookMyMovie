@@ -1,0 +1,22 @@
+.header{
+    background: #222;
+    padding: 8px 32px 8px 16px;
+    height: 36px;
+}
+.logo{
+    width: 35px;
+    height: 35px;
+    text-indent: -9999px;
+    background: #ff7f7f;
+    animation: logoanimation 8s infinite linear;
+}
+.logo img{
+    display: block;
+    width: auto;
+    height: 100%;
+}
+@keyframes logoanimation {
+  0%{transform: rotateY(180deg);}
+  50% {transform: rotateY(360deg);}
+  100% {transform: rotateY(180deg);}
+}
