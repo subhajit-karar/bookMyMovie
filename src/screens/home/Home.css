@@ -10,3 +10,9 @@
 .upcomingMovieList .movielist{
     width: 120%;
 }
+.upcomingMovieList .movielist > div{
+    padding: 8px;
+}
+.currentContainer .movielist > div{
+    padding: 16px;
+}
