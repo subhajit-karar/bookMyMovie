@@ -4,3 +4,9 @@
     padding: 8px 0;
     text-align: center;
 }
+.upcomingMovieList{
+    overflow: auto;
+}
+.upcomingMovieList .movielist{
+    width: 120%;
+}
