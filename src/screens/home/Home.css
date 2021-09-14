@@ -4,15 +4,18 @@
     padding: 8px 0;
     text-align: center;
 }
-.upcomingMovieList{
-    overflow: auto;
+.currentContainer{
+    margin-top: 30px;
+    padding: 0 20px;
 }
-.upcomingMovieList .movielist{
-    width: 120%;
+.upComingContainer{
+    overflow: hidden;
 }
-.upcomingMovieList .movielist > div{
-    padding: 8px;
+
+.MuiImageListItem-item a{
+    display: block;
+    height: 100%;
 }
-.currentContainer .movielist > div{
-    padding: 16px;
+.MuiImageListItem-item img{
+    width: 100%;;
 }

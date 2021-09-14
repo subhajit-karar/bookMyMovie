@@ -5,7 +5,6 @@ import Modal from "@material-ui/core/Modal";
 import PropTypes from "prop-types";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Login from "./Login";
 import Register from "./Register"
 import "./login.css";
