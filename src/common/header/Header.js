@@ -1,24 +1,27 @@
 import React from "react";
 import './Header.css';
 import Logo from '../../assets/logo.svg';
-
+import { Link } from "react-router-dom";
 import ModalContainer from "../login/ModalContainer"
 
 
 
 
-export default function Header(){
+export default function Header(props){
     return(
     <div className="header">
-        <div className="logo">
-            <img src={Logo}  alt="logo"/>
-        </div>
+        <Link to="/">
+            <div className="logo">
+                <img src={Logo}  alt="logo"/>
+            </div>
+        </Link>
         <div className="action">
-            {/* <Button variant="contained" color="primary">
-                Book Show
-            </Button> */}
             
-            <ModalContainer />
+        
+            
+            {/* :"" */}
+            
+            <ModalContainer {...props} />
         </div>
 
     </div>);

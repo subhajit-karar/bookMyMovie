@@ -19,3 +19,9 @@
 .MuiImageListItem-item img{
     width: 100%;;
 }
+.theme-primary-color{
+    color:#4791db;
+}
+.text-uppercase{
+    text-transform: uppercase;
+}

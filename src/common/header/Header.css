@@ -26,6 +26,9 @@
     float: right;
     text-align: right;
 }
+.header .action a{
+    text-decoration: none;
+}
 .header .action button{
     margin-left: 12px;
 }

@@ -125,7 +125,7 @@ export default function Details() {
 
   return (
     <div className="detailsPage">
-      <Header />
+      <Header bookShow={movieDetails.id?movieDetails.id:null}/>
       <Typography component="div" className="page-container">
         <div className="breadCrumb">
           <Link to="/">{`< Back to Home`}</Link>
