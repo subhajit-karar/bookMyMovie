@@ -5,8 +5,7 @@ import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import ImageListItemBar from '@material-ui/core/ImageListItemBar';
 import { Link } from "react-router-dom";
-// import IconButton from '@material-ui/core/IconButton';
-// import StarBorderIcon from '@material-ui/icons/StarBorder';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function UpcomingMovies(props) {
   // use state for ucoming movies... each grid will carry single movie
- console.log(props.movies);
+ //console.log(props.movies);
  
 const classes = useStyles();
   return (
