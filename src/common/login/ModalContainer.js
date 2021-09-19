@@ -64,6 +64,7 @@ const ModalContainer = (props) => {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [isLogin, setIslogin] = React.useState(false);
 
 
   //const classes = useStyles();
@@ -80,6 +81,11 @@ const ModalContainer = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const handleisLogin = (e) => {
+    if(e.clicked){
+      setIslogin(!isLogin);
+    }
+  };
 
   const body = (
     <div style={modalStyle} className="modalContainer">
@@ -93,7 +99,7 @@ const ModalContainer = (props) => {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Login {...props} />
+        <Login {...props} loginHandle={handleisLogin} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Register {...props} />
@@ -109,8 +115,8 @@ const ModalContainer = (props) => {
             </Button>
             </Link>:""
           }  
-      <Button variant="contained" onClick={handleOpen}>
-        Login
+      <Button variant="contained" onClick={(!isLogin)?handleOpen:()=>handleisLogin({"clicked":true})}>
+        {(!isLogin)?"Login":"logout"}
       </Button>
       <Modal
         open={open}
