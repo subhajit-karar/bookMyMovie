@@ -13,9 +13,7 @@ import Select from "@material-ui/core/Select";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
-import TextField from '@material-ui/core/TextField'
-
-
+import TextField from "@material-ui/core/TextField";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -27,50 +25,41 @@ const MenuProps = {
     },
   },
 };
-// const names = [
-//   "Oliver Hansen",
-//   "Van Henry",
-//   "April Tucker",
-//   "Ralph Hubbard",
-//   "Omar Alexander",
-//   "Carlos Abbott",
-//   "Miriam Wagner",
-//   "Bradley Wilkerson",
-//   "Virginia Andrews",
-//   "Kelly Snyder",
-// ];
 
 function Filter(props) {
   // console.log(props);
 
+  //const [movies, setMovies] = useState([]);
 
-
-  const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState();
   const [artists, setArtists] = useState();
+
   const [genrename, setGenrename] = React.useState([]);
   const [personName, setPersonName] = React.useState([]);
+  const [movieName, setMovieName] = React.useState("");
+
 
   useEffect(() => {
-    setMovies(props.movieList);
+    //setMovies(props.movieList);
     let tempGenres = [];
     let tempArtists = [];
-    props.movieList.forEach(element => {
-        element.genres.forEach(gen=>{
-            if(tempGenres.indexOf(gen)===-1){
-                tempGenres.push(gen);
-            }
-        });
-        element.artists.forEach(artist=>{
-            if(tempArtists.indexOf(artist.first_name+" "+artist.last_name)===-1){
-                tempArtists.push(artist.first_name+" "+artist.last_name);
-            }
-        });
+    props.movieList.forEach((element) => {
+      element.genres.forEach((gen) => {
+        if (tempGenres.indexOf(gen) === -1) {
+          tempGenres.push(gen);
+        }
+      });
+      element.artists.forEach((artist) => {
+        if (
+          tempArtists.indexOf(artist.first_name + " " + artist.last_name) === -1
+        ) {
+          tempArtists.push(artist.first_name + " " + artist.last_name);
+        }
+      });
     });
-    //console.log(tempArtists);
+
     setGenres(tempGenres);
     setArtists(tempArtists);
-
   }, [props]);
 
   const handlePersonChange = (event) => {
@@ -79,113 +68,134 @@ function Filter(props) {
   const handleGenreChange = (event) => {
     setGenrename(event.target.value);
   };
-
-  const handleChangeMultiple = (event) => {
-    const { options } = event.target;
-    const value = [];
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setPersonName(value);
+  // const handleGenreChange = (event) => {
+  //   setGenrename(event.target.value);
+  // };
+  const handleMovieName = (event) => {
+    setMovieName(event.target.value);
   };
 
-
+  const handleSubmitForm = (e) => {
+    // console.log("movieName "+movieName);
+    // console.log("personName "+personName);
+    // console.log("genrename "+genrename);
+    e.preventDefault();
+    props.filterTrigger({
+      movieName: movieName,
+      personName: personName,
+      genrename: genrename,
+    });
+  };
 
   return (
     <Card>
-      <CardContent>
-        <Typography
-          className="theme-primary-color text-uppercase"
-          gutterBottom={true}
-        >
-          Find movies by:
-        </Typography>
-        <br />
-        <FormControl className="formControl">
-          <InputLabel htmlFor="movieName">Movie Name</InputLabel>
-          <Input id="movieName" value="" />
-          {/* <FormHelperText >
-                <span className="red">Required</span>
-              </FormHelperText> */}
-        </FormControl>
-        <br />
-        <br />
-        <FormControl className="formControl">
-          <InputLabel id="demo-mutiple-checkbox-label">Genres</InputLabel>
-          <Select
-            labelId="demo-mutiple-checkbox-label"
-            id="demo-mutiple-checkbox"
-            multiple
-            value={genrename}
-            onChange={handleGenreChange}
-            input={<Input />}
-            renderValue={(selected) => selected.join(", ")}
-            MenuProps={MenuProps}
+      <form name="movieDetails" id="movieDetails">
+        <CardContent>
+          <Typography
+            className="theme-primary-color text-uppercase"
+            gutterBottom={true}
           >
-            {genres && genres.map((name) => (
-              <MenuItem key={name} value={name}>
-                <Checkbox checked={genrename.indexOf(name) > -1} />
-                <ListItemText primary={name} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <br />
-        <br />
-        <FormControl className="formControl">
-          <InputLabel id="demo-mutiple-checkbox-label">Artists</InputLabel>
-          <Select
-            labelId="demo-mutiple-checkbox-label"
-            id="demo-mutiple-checkbox"
-            multiple
-            value={personName}
-            onChange={handlePersonChange}
-            input={<Input />}
-            renderValue={(selected) => selected.join(", ")}
-            MenuProps={MenuProps}
+            Find movies by:
+          </Typography>
+          <br />
+
+          <FormControl className="formControl">
+            <InputLabel htmlFor="movieName">Movie Name</InputLabel>
+            <Input
+              id="movieName"
+              name="movieName"
+              value={movieName}
+              onChange={handleMovieName}
+            />
+          </FormControl>
+          <br />
+          <br />
+          <FormControl className="formControl">
+            <InputLabel id="demo-mutiple-checkbox-label">Genres</InputLabel>
+            <Select
+              labelId="demo-mutiple-checkbox-label"
+              id="demo-mutiple-checkbox"
+              multiple
+              value={genrename}
+              onChange={handleGenreChange}
+              input={<Input />}
+              name="genrename"
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={MenuProps}
+            >
+              {genres &&
+                genres.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked={genrename.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+          <br />
+          <br />
+          <FormControl className="formControl">
+            <InputLabel id="demo-mutiple-checkbox-label">Artists</InputLabel>
+            <Select
+              labelId="demo-mutiple-checkbox-label"
+              id="demo-mutiple-checkbox"
+              multiple
+              value={personName}
+              onChange={handlePersonChange}
+              input={<Input />}
+              name="personName"
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={MenuProps}
+            >
+              {artists &&
+                artists.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked={personName.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+          <br />
+          <br />
+          <FormControl className="formControl">
+            <TextField
+              id="releaseDateStart"
+              label="Release Date Start"
+              type="date"
+              name="releaseDateStart"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </FormControl>
+          <br />
+          <br />
+          <FormControl className="formControl">
+            <TextField
+              id="releaseDateEnd"
+              label="Release Date End"
+              type="date"
+              name="releaseDateEnd"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </FormControl>
+          <br />
+          <br />
+        </CardContent>
+        <CardActions>
+          <Button
+            onClick={handleSubmitForm}
+            fullWidth={true}
+            variant="contained"
+            color="primary"
           >
-            {artists && artists.map((name) => (
-              <MenuItem key={name} value={name}>
-                <Checkbox checked={personName.indexOf(name) > -1} />
-                <ListItemText primary={name} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <br />
-        <br />
-        <FormControl className="formControl">
-            <TextField
-            id="releaseDateStart"
-            label="Release Date Start"
-            type="date"
-            InputLabelProps={{
-            shrink: true,
-            }}
-        />
-        </FormControl>
-        <br />
-        <br />
-        <FormControl className="formControl">
-            <TextField
-            id="releaseDateEnd"
-            label="Release Date End"
-            type="date"
-            InputLabelProps={{
-            shrink: true,
-            }}
-        />
-        </FormControl>
-        <br />
-        <br />
-      </CardContent>
-      <CardActions>
-        <Button fullWidth={true} variant="contained" color="primary">
-          Apply
-        </Button>
-      </CardActions>
+            Apply
+          </Button>
+        </CardActions>
+      </form>
     </Card>
   );
 }

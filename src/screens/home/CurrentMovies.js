@@ -11,11 +11,47 @@ import Filter from "./Filter";
 function CurrentMovies(props) {
   //use State for managging filter
   const [movieList, setMovie] = useState([]);
+  const [resetMovieList, setResetMovieList] = useState([]);
   useEffect(() => {
     let tempmovies = props.movies.filter((movie) => movie.status === "RELEASED");
     setMovie(tempmovies);
+    setResetMovieList(tempmovies);
     //console.log("movielist",movieList);
   }, [props]);
+
+  const handleFilterUpdate = (val) => {
+    let tempMovieList = [...movieList];
+   // console.log("Before Filter",tempMovieList);
+    if(val.movieName.length > 0 || val.genrename.length > 0 || val.personName.length > 0){
+      tempMovieList =  tempMovieList.filter((item)=>{
+        if(val.movieName.length > 0 && item.title.toLowerCase().indexOf(val.movieName.toLowerCase()) !== -1){
+          return item;
+        }else if(val.genrename.length > 0 ){
+          for (const gen of val.genrename){
+            if(item.genres.includes(gen)){
+              return item;
+            }
+          }
+        }else if(val.personName.length > 0 ){
+          for (const person of val.personName){
+            for(const artist of item.artists){
+              if(artist.first_name === person.split(" ")[0]){
+                return item;
+              }
+            }
+          }
+        }
+        return false;
+      
+      });
+      
+     // console.log("After Filter",tempMovieList);
+      setMovie(tempMovieList);
+    }else{
+      setMovie(resetMovieList)
+    }
+    
+  }
 
   return (
     <div className="currentContainer">
@@ -38,7 +74,7 @@ function CurrentMovies(props) {
             </ImageList>
           </Grid>
           <Grid item xs={3}>
-              <Filter movieList={movieList}/>
+              <Filter movieList={movieList} filterTrigger={handleFilterUpdate}/>
           
           </Grid>
         </Grid>

@@ -17,10 +17,6 @@ export default function Header(props){
         </Link>
         <div className="action">
             
-        
-            
-            {/* :"" */}
-            
             <ModalContainer {...props} />
         </div>
 
