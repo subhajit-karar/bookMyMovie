@@ -16,6 +16,7 @@ function CurrentMovies(props) {
     let tempmovies = props.movies.filter((movie) => movie.status === "RELEASED");
     setMovie(tempmovies);
     setResetMovieList(tempmovies);
+  
     //console.log("movielist",movieList);
   }, [props]);
 

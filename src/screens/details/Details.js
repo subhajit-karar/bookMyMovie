@@ -10,13 +10,13 @@ import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
 import "./Details.css";
 
-export default function Details() {
+export default function Details(props) {
   const [movieDetails, setMoviedetails] = useState([]);
   const [starView, setStarValue] = React.useState(0);
 
   function loadData() {
     fetch(
-      "http://localhost:8086/api/v1/movies/" +
+      props.baseUrl+"movies/" +
         window.location.pathname.replace(/.*\//, "")
     )
       .then((input) => input.json())
@@ -125,7 +125,7 @@ export default function Details() {
 
   return (
     <div className="detailsPage">
-      <Header bookShow={movieDetails.id?movieDetails.id:null}/>
+      <Header {...props} bookShow={movieDetails.id?movieDetails.id:null}/>
       <Typography component="div" className="page-container">
         <div className="breadCrumb">
           <Link to="/">{`< Back to Home`}</Link>

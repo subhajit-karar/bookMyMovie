@@ -10,6 +10,8 @@ function Login() {
     //     setAddSubscriberForm({ id: 0, name: '', phone: ' ' });
     // history.push("/")
   };
+  
+   
   return (
     <ValidatorForm className="login-form" onSubmit={onFormSubmitted}>
       <br />
@@ -18,8 +20,7 @@ function Login() {
         label="Username *"
         type="text"
         name="username"
-        // onChange={inputChangedHandler}
-        //value={}
+
         validators={["required"]}
         errorMessages={["required"]}
       ></TextValidator>

@@ -93,10 +93,10 @@ const ModalContainer = (props) => {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Login />
+        <Login {...props} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Register />
+        <Register {...props} />
       </TabPanel>
     </div>
   );

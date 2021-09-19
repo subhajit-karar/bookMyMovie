@@ -9,7 +9,7 @@ export default function Home(props){
     const [movieList, setMovie] = useState([]);
     //const upcomingMovies = 
     function loadData(){
-      fetch("http://localhost:8086/api/v1/movies/")
+      fetch(props.baseUrl+"movies/")
                     .then(input=>input.json())
                     .then(data=>setMovie(data.movies));
     }
@@ -19,7 +19,7 @@ export default function Home(props){
     }, []);
     return(
     <div className="main-Container">
-        <Header />
+        <Header {...props} />
         <UpcomingMovies {...props} movies={movieList}/>
         <CurrentMovies {...props} movies={movieList}/>
 
